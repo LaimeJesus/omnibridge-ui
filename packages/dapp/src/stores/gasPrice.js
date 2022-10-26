@@ -92,7 +92,7 @@ class GasPriceStore {
 
     this.updateGasPrice();
 
-    this.updateHistoricalPrice();
+    // this.updateHistoricalPrice();
   }
 
   async updateGasPrice() {

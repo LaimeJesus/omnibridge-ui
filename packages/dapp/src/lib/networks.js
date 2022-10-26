@@ -2,6 +2,7 @@ import {
   BSC_XDAI_BRIDGE,
   ETH_BSC_BRIDGE,
   ETH_XDAI_BRIDGE,
+  GOERLI_CHIADO_BRIDGE,
   KOVAN_SOKOL_BRIDGE,
   nativeCurrencies,
   POA_XDAI_BRIDGE,
@@ -13,6 +14,7 @@ export {
   ETH_XDAI_BRIDGE,
   KOVAN_SOKOL_BRIDGE,
   POA_XDAI_BRIDGE,
+  GOERLI_CHIADO_BRIDGE,
 };
 
 const ETH_XDAI_BRIDGE_CONFIG = {
@@ -126,16 +128,37 @@ const ETH_BSC_BRIDGE_CONFIG = {
   tokensClaimDisabled: [],
 };
 
+const GOERLI_CHIADO_BRIDGE_CONFIG = {
+  label: 'goerli⥊chiado',
+  homeChainId: 10200,
+  foreignChainId: 5,
+  enableForeignCurrencyBridge: false,
+  homeWrappedForeignCurrencyAddress: null,
+  wrappedForeignCurrencyAddress: null,
+  foreignMediatorAddress:
+    '0x00147c84f13764dCDAbAF1cbAe622fa6f6839085'.toLowerCase(),
+  homeMediatorAddress:
+    '0x09D549a48AC52F3f9945E7de6402c609c92aa2E1'.toLowerCase(),
+  foreignAmbAddress: '0x87A19d769D875964E9Cd41dDBfc397B2543764E6'.toLowerCase(),
+  homeAmbAddress: '0x99Ca51a3534785ED619f46A79C7Ad65Fa8d85e7a'.toLowerCase(),
+  foreignGraphName: 'raid-guild/mainnet-omnibridge', // @todo we should deploy sg to goerli
+  homeGraphName: 'raid-guild/xdai-omnibridge', // @todo we should deploy sg to chiado (sg does not support hosted service, need to host a node)
+  ambLiveMonitorPrefix: 'https://alm-xdai.herokuapp.com', // @todo ....
+  claimDisabled: false,
+  tokensClaimDisabled: [],
+};
+
 const ENABLED_BRIDGES = process.env.REACT_APP_ENABLED_BRIDGES.split(' ').map(
   b => b.toLowerCase(),
 );
 
 const bridgeInfo = {
-  [ETH_XDAI_BRIDGE]: ETH_XDAI_BRIDGE_CONFIG,
-  [BSC_XDAI_BRIDGE]: BSC_XDAI_BRIDGE_CONFIG,
-  [POA_XDAI_BRIDGE]: POA_XDAI_BRIDGE_CONFIG,
-  [KOVAN_SOKOL_BRIDGE]: KOVAN_SOKOL_BRIDGE_CONFIG,
-  [ETH_BSC_BRIDGE]: ETH_BSC_BRIDGE_CONFIG,
+  // [ETH_XDAI_BRIDGE]: ETH_XDAI_BRIDGE_CONFIG,
+  // [BSC_XDAI_BRIDGE]: BSC_XDAI_BRIDGE_CONFIG,
+  // [POA_XDAI_BRIDGE]: POA_XDAI_BRIDGE_CONFIG,
+  // [KOVAN_SOKOL_BRIDGE]: KOVAN_SOKOL_BRIDGE_CONFIG,
+  // [ETH_BSC_BRIDGE]: ETH_BSC_BRIDGE_CONFIG,
+  [GOERLI_CHIADO_BRIDGE]: GOERLI_CHIADO_BRIDGE_CONFIG,
 };
 
 const getNetworkConfig = bridges => {
@@ -148,69 +171,83 @@ const getNetworkConfig = bridges => {
 export const networks = getNetworkConfig(ENABLED_BRIDGES);
 
 export const defaultTokens = {
-  [ETH_XDAI_BRIDGE]: {
-    1: {
-      address: '0x6810e776880c02933d47db1b9fc05908e5386b96',
-      chainId: 1,
-      symbol: 'GNO',
-      name: 'Gnosis Token',
+  // [ETH_XDAI_BRIDGE]: {
+  //   1: {
+  //     address: '0x6810e776880c02933d47db1b9fc05908e5386b96',
+  //     chainId: 1,
+  //     symbol: 'GNO',
+  //     name: 'Gnosis Token',
+  //   },
+  //   100: {
+  //     address: '0x9c58bacc331c9aa871afd802db6379a98e80cedb',
+  //     chainId: 100,
+  //     symbol: 'GNO',
+  //     name: 'Gnosis Token from Ethereum',
+  //   },
+  // },
+  // [KOVAN_SOKOL_BRIDGE]: {
+  //   42: {
+  //     address: '0xFD2df5dCe4c89B007A43CF88d8161dAf1A17C7AB',
+  //     chainId: 42,
+  //     symbol: 'STAKE',
+  //     name: 'STAKE',
+  //   },
+  //   77: {
+  //     address: '0x408ec1bb883da0ea0fb3c955ea6befcd05aa7c3a',
+  //     chainId: 77,
+  //     symbol: 'STAKE',
+  //     name: 'STAKE on xDai',
+  //   },
+  // },
+  // [BSC_XDAI_BRIDGE]: {
+  //   56: {
+  //     address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+  //     chainId: 56,
+  //     symbol: 'WBNB',
+  //     name: 'Wrapped BNB',
+  //   },
+  //   100: {
+  //     address: '0xCa8d20f3e0144a72C6B5d576e9Bd3Fd8557E2B04',
+  //     chainId: 100,
+  //     symbol: 'WBNB',
+  //     name: 'Wrapped BNB on GC',
+  //   },
+  // },
+  // [POA_XDAI_BRIDGE]: {
+  //   99: nativeCurrencies[99],
+  //   100: {
+  //     address: '0x9fe3864F9Ae7cfb5668Dae90C0e20c4C3D437664',
+  //     chainId: 100,
+  //     symbol: 'WPOA',
+  //     name: 'Wrapped POA from POA',
+  //   },
+  // },
+  // [ETH_BSC_BRIDGE]: {
+  //   56: {
+  //     address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+  //     chainId: 56,
+  //     symbol: 'WBNB',
+  //     name: 'Wrapped BNB',
+  //   },
+  //   1: {
+  //     address: '0x47f29657fd9f76710452208e9b12d8e9745e595c',
+  //     chainId: 1,
+  //     symbol: 'WBNB',
+  //     name: 'Wrapped BNB from BSC',
+  //   },
+  // },
+  [GOERLI_CHIADO_BRIDGE]: {
+    5: {
+      address: '0xdc31ee1784292379fbb2964b3b9c4124d8f89c60',
+      chainId: 5,
+      symbol: 'DAI',
+      name: 'Goerli DAI',
     },
-    100: {
-      address: '0x9c58bacc331c9aa871afd802db6379a98e80cedb',
-      chainId: 100,
-      symbol: 'GNO',
-      name: 'Gnosis Token from Ethereum',
+    10200: {
+      address: '0xB6dBb6971EE05b2AB1E1Ca60DD4a10A068161Ae7',
+      chainId: 10200,
+      symbol: 'TGNO',
+      name: 'Test Gnosis Token from Ethereum',
     },
-  },
-  [KOVAN_SOKOL_BRIDGE]: {
-    42: {
-      address: '0xFD2df5dCe4c89B007A43CF88d8161dAf1A17C7AB',
-      chainId: 42,
-      symbol: 'STAKE',
-      name: 'STAKE',
-    },
-    77: {
-      address: '0x408ec1bb883da0ea0fb3c955ea6befcd05aa7c3a',
-      chainId: 77,
-      symbol: 'STAKE',
-      name: 'STAKE on xDai',
-    },
-  },
-  [BSC_XDAI_BRIDGE]: {
-    56: {
-      address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-      chainId: 56,
-      symbol: 'WBNB',
-      name: 'Wrapped BNB',
-    },
-    100: {
-      address: '0xCa8d20f3e0144a72C6B5d576e9Bd3Fd8557E2B04',
-      chainId: 100,
-      symbol: 'WBNB',
-      name: 'Wrapped BNB on GC',
-    },
-  },
-  [POA_XDAI_BRIDGE]: {
-    99: nativeCurrencies[99],
-    100: {
-      address: '0x9fe3864F9Ae7cfb5668Dae90C0e20c4C3D437664',
-      chainId: 100,
-      symbol: 'WPOA',
-      name: 'Wrapped POA from POA',
-    },
-  },
-  [ETH_BSC_BRIDGE]: {
-    56: {
-      address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-      chainId: 56,
-      symbol: 'WBNB',
-      name: 'Wrapped BNB',
-    },
-    1: {
-      address: '0x47f29657fd9f76710452208e9b12d8e9745e595c',
-      chainId: 1,
-      symbol: 'WBNB',
-      name: 'Wrapped BNB from BSC',
-    },
-  },
+  }
 };

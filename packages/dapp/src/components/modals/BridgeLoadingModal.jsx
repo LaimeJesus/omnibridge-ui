@@ -198,7 +198,8 @@ export const BridgeLoadingModal = () => {
     ) : (
       <BridgeLoader
         loadingText={loadingText}
-        loading={loading || !fromToken}
+        // loading={loading || !fromToken}
+        loading={loading}
         confirmations={confirmations}
         totalConfirms={totalConfirms}
         chainId={chainId}
