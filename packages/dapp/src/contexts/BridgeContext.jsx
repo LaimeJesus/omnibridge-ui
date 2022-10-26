@@ -141,22 +141,28 @@ export const BridgeProvider = ({ children }) => {
     async (tokenWithoutMode, isQueryToken = false) => {
       if (!tokenWithoutMode) return false;
       try {
-        const [token, gotToToken] = await Promise.all([
-          tokenWithoutMode?.address === ADDRESS_ZERO
-            ? {
-                ...getNativeCurrency(tokenWithoutMode.chainId),
-                mediator: getMediatorAddress(bridgeDirection, tokenWithoutMode),
-                helperContractAddress: getHelperContract(
-                  tokenWithoutMode.chainId,
-                ),
-              }
-            : fetchTokenDetails(bridgeDirection, tokenWithoutMode),
-          fetchToToken(
+        if (tokenWithoutMode?.address === ADDRESS_ZERO) {
+          const token = {
+            ...getNativeCurrency(tokenWithoutMode.chainId),
+            mediator: getMediatorAddress(bridgeDirection, tokenWithoutMode),
+            helperContractAddress: getHelperContract(
+              tokenWithoutMode.chainId,
+            ),
+          }
+          const gotToToken = await fetchToToken(
             bridgeDirection,
             tokenWithoutMode,
             getBridgeChainId(tokenWithoutMode.chainId),
-          ),
-        ]);
+          )
+          setTokens({ fromToken: token, toToken: { ...token, ...gotToToken } });
+          return true;
+        }
+        const token = await fetchTokenDetails(bridgeDirection, tokenWithoutMode)
+        const gotToToken = await fetchToToken(
+          bridgeDirection,
+          tokenWithoutMode,
+          getBridgeChainId(tokenWithoutMode.chainId),
+        )
         setTokens({ fromToken: token, toToken: { ...token, ...gotToToken } });
         return true;
       } catch (tokenDetailsError) {

@@ -13,7 +13,8 @@ export const useRenderChain = () => {
   const renderChain = useCallback(
     chainId => {
       const networkName = getNetworkName(chainId);
-      const isDefaultChain = [1, 3, 4, 5, 42].includes(chainId);
+      // const isDefaultChain = [1, 3, 4, 5, 42].includes(chainId);
+      const isDefaultChain = [5, 10200].includes(chainId);
       const isMobileBrowser = navigator?.userAgent?.includes('Mobile') || false;
       const buttonWillWork =
         isMetamask && (isMobileBrowser ? !isDefaultChain : true);

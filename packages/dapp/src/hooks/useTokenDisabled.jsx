@@ -13,13 +13,14 @@ import {
   BSC_XDAI_BRIDGE,
   ETH_BSC_BRIDGE,
   ETH_XDAI_BRIDGE,
+  GOERLI_CHIADO_BRIDGE,
 } from 'lib/constants';
 import { logError } from 'lib/helpers';
 import { networks } from 'lib/networks';
 import { getEthersProvider } from 'lib/providers';
 import { useCallback, useEffect, useState } from 'react';
 
-const GC_BSC_OMNIBRIDGE = networks[BSC_XDAI_BRIDGE].foreignMediatorAddress;
+const GC_BSC_OMNIBRIDGE = networks[GOERLI_CHIADO_BRIDGE].foreignMediatorAddress;
 
 export const useTokenGCOriginOnBSC = token => {
   const { bridgeDirection } = useBridgeDirection();
