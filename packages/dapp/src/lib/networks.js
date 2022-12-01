@@ -1,8 +1,14 @@
 import {
   BSC_XDAI_BRIDGE,
+  CHIADO_HOME_AMB_ADDRESS,
+  CHIADO_HOME_OMNIBRIDGE_ADDRESS,
+  CHIADO_TOKEN_ADDRESS,
   ETH_BSC_BRIDGE,
   ETH_XDAI_BRIDGE,
   GOERLI_CHIADO_BRIDGE,
+  GOERLI_FOREIGN_AMB_ADDRESS,
+  GOERLI_FOREIGN_OMNIBRIDGE_ADDRESS,
+  GOERLI_TOKEN_ADDRESS,
   KOVAN_SOKOL_BRIDGE,
   nativeCurrencies,
   POA_XDAI_BRIDGE,
@@ -135,12 +141,10 @@ const GOERLI_CHIADO_BRIDGE_CONFIG = {
   enableForeignCurrencyBridge: false,
   homeWrappedForeignCurrencyAddress: null,
   wrappedForeignCurrencyAddress: null,
-  foreignMediatorAddress:
-    '0x00147c84f13764dCDAbAF1cbAe622fa6f6839085'.toLowerCase(),
-  homeMediatorAddress:
-    '0x09D549a48AC52F3f9945E7de6402c609c92aa2E1'.toLowerCase(),
-  foreignAmbAddress: '0x87A19d769D875964E9Cd41dDBfc397B2543764E6'.toLowerCase(),
-  homeAmbAddress: '0x99Ca51a3534785ED619f46A79C7Ad65Fa8d85e7a'.toLowerCase(),
+  foreignMediatorAddress: GOERLI_FOREIGN_OMNIBRIDGE_ADDRESS.toLowerCase(),
+  homeMediatorAddress: CHIADO_HOME_OMNIBRIDGE_ADDRESS.toLowerCase(),
+  foreignAmbAddress: GOERLI_FOREIGN_AMB_ADDRESS.toLowerCase(),
+  homeAmbAddress: CHIADO_HOME_AMB_ADDRESS.toLowerCase(),
   foreignGraphName: 'raid-guild/mainnet-omnibridge', // @todo we should deploy sg to goerli
   homeGraphName: 'raid-guild/xdai-omnibridge', // @todo we should deploy sg to chiado (sg does not support hosted service, need to host a node)
   ambLiveMonitorPrefix: 'https://alm-xdai.herokuapp.com', // @todo ....
@@ -238,13 +242,13 @@ export const defaultTokens = {
   // },
   [GOERLI_CHIADO_BRIDGE]: {
     5: {
-      address: '0xdc31ee1784292379fbb2964b3b9c4124d8f89c60',
+      address: GOERLI_TOKEN_ADDRESS.toLowerCase(),
       chainId: 5,
       symbol: 'DAI',
       name: 'Goerli DAI',
     },
     10200: {
-      address: '0xB6dBb6971EE05b2AB1E1Ca60DD4a10A068161Ae7',
+      address: CHIADO_TOKEN_ADDRESS.toLowerCase(),
       chainId: 10200,
       symbol: 'TGNO',
       name: 'Test Gnosis Token from Ethereum',
